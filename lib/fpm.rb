@@ -16,7 +16,4 @@ require "fpm/package/osxpkg"
 require "fpm/package/solaris"
 require "fpm/package/p5p"
 require "fpm/package/pkgin"
-<<<<<<< HEAD
-=======
 require "fpm/package/freebsd"
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86

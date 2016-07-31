@@ -58,14 +58,8 @@ AutoProv: yes
 # Seems specifying BuildRoot is required on older rpmbuild (like on CentOS 5)
 # fpm passes '--define buildroot ...' on the commandline, so just reuse that.
 BuildRoot: %buildroot
-<<<<<<< HEAD
-# Add prefix, must not end with /
-<% if !prefix.nil? and !prefix.empty? %>
-Prefix: <%= prefix.gsub(/([^\/]+)(\/$)/, '') %>
-=======
 <% if !prefix.nil? and !prefix.empty? %>
 Prefix: <%= prefix %>
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 <% end -%>
 
 Group: <%= category %>
@@ -88,12 +82,9 @@ Packager: <%= maintainer %>
 <% dependencies.each do |req| -%>
 Requires: <%= req %>
 <% end -%>
-<<<<<<< HEAD
-=======
 <% (attributes[:rpm_tag] or []).each do |tag| -%>
 <%= tag %>
 <% end -%>
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 <% end -%>
 <% provides.each do |prov| -%>
 Provides: <%= prov %>

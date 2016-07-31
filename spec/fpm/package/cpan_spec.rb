@@ -29,8 +29,6 @@ describe FPM::Package::CPAN, :if => have_cpanm do
     # the File::Spec module comes from the PathTools CPAN distribution
     insist { subject.name } == "perl-PathTools"
   end
-<<<<<<< HEAD
-=======
 
   context "given a distribution without a META.* file" do
     it "should package IPC::Session" do
@@ -39,5 +37,4 @@ describe FPM::Package::CPAN, :if => have_cpanm do
       subject.input("IPC::Session")
     end
   end
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 end # describe FPM::Package::CPAN

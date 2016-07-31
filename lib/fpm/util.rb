@@ -45,44 +45,6 @@ module FPM::Util
     return shell
   end
 
-<<<<<<< HEAD
-  # Run a command safely in a way that gets reports useful errors.
-  def safesystem(*args)
-    # ChildProcess isn't smart enough to run a $SHELL if there's
-    # spaces in the first arg and there's only 1 arg.
-    if args.size == 1
-      args = [ default_shell, "-c", args[0] ]
-    end
-    program = args[0]
-
-    if !program_exists?(program)
-      raise ExecutableNotFound.new(program)
-    end
-
-    logger.debug("Running command", :args => args)
-
-    # Create a pair of pipes to connect the
-    # invoked process to the cabin logger
-    stdout_r, stdout_w = IO.pipe
-    stderr_r, stderr_w = IO.pipe
-
-    process           = ChildProcess.build(*args)
-    process.io.stdout = stdout_w
-    process.io.stderr = stderr_w
-
-    process.start
-    stdout_w.close; stderr_w.close
-    logger.debug('Process is running', :pid => process.pid)
-    # Log both stdout and stderr as 'info' because nobody uses stderr for
-    # actually reporting errors and as a result 'stderr' is a misnomer.
-    logger.pipe(stdout_r => :info, stderr_r => :info)
-
-    process.wait
-    success = (process.exit_code == 0)
-
-    if !success
-      raise ProcessFailed.new("#{program} failed (exit code #{process.exit_code})" \
-=======
   ############################################################################
   # execmd([env,] cmd [,opts])
   #
@@ -235,7 +197,6 @@ module FPM::Util
 
     if !success
       raise ProcessFailed.new("#{program} failed (exit code #{exit_code})" \
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
                               ". Full command was:#{args.inspect}")
     end
     return success
@@ -252,31 +213,6 @@ module FPM::Util
       raise ExecutableNotFound.new(program)
     end
 
-<<<<<<< HEAD
-    logger.debug("Running command", :args => args)
-
-    stdout_r, stdout_w = IO.pipe
-    stderr_r, stderr_w = IO.pipe
-
-    process           = ChildProcess.build(*args)
-    process.io.stdout = stdout_w
-    process.io.stderr = stderr_w
-
-    process.start
-    stdout_w.close; stderr_w.close
-    stdout_r_str = stdout_r.read
-    stdout_r.close; stderr_r.close
-    logger.debug("Process is running", :pid => process.pid)
-
-    process.wait
-    success = (process.exit_code == 0)
-
-    if !success
-      raise ProcessFailed.new("#{program} failed (exit code #{process.exit_code})" \
-                              ". Full command was:#{args.inspect}")
-    end
-
-=======
     stdout_r_str = nil
     exit_code = execmd(args, :stdin=>false, :stderr=>false) do |stdout|
       stdout_r_str = stdout.read
@@ -287,7 +223,6 @@ module FPM::Util
       raise ProcessFailed.new("#{program} failed (exit code #{exit_code})" \
                               ". Full command was:#{args.inspect}")
     end
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     return stdout_r_str
   end # def safesystemout
 
@@ -303,26 +238,14 @@ module FPM::Util
         system("#{tar} > /dev/null 2> /dev/null")
         return tar unless $?.exitstatus == 127
       end
-<<<<<<< HEAD
-=======
     when "FreeBSD"
       # use gnutar instead
       return "gtar"
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     else
       return "tar"
     end
   end # def tar_cmd
 
-<<<<<<< HEAD
-  # Run a block with a value.
-  # Useful in lieu of assigning variables
-  def with(value, &block)
-    block.call(value)
-  end # def with
-
-=======
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   # wrapper around mknod ffi calls
   def mknod_w(path, mode, dev)
     rc = -1
@@ -431,8 +354,5 @@ module FPM::Util
     @logger ||= Cabin::Channel.get
   end # def logger
 end # module FPM::Util
-<<<<<<< HEAD
-=======
 
 require 'fpm/util/tar_writer'
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86

@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 1.6.2 (July 1, 2016)
   - Reduce `json` dependency version to avoid requiring Ruby 2.0 (#1146, #1147;
     patch by Matt Hoffman)
@@ -58,7 +56,6 @@
   - rpm: No more warning if you don't set an epoch. (#1053, Joseph Frazier)
 
 
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 1.4.0 (July 26, 2015)
   - Solaris 11 IPS packages 'p5p' now supported `-t p5p`. (Jonathan Craig)
   - Python Virtualenv is now supported `-t virtualenv` (#930, Simone

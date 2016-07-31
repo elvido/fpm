@@ -12,8 +12,6 @@ if !python_usable?
     "'python' and/or 'easy_install' isn't in your PATH")
 end
 
-<<<<<<< HEAD
-=======
 # Determine default value of a given easy_install's option
 def easy_install_default(option)
   result = nil
@@ -26,7 +24,6 @@ def easy_install_default(option)
   return result
 end
 
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 describe FPM::Package::Python, :if => python_usable? do
   let (:example_dir) do
     File.expand_path("../../fixtures/python/", File.dirname(__FILE__))
@@ -179,16 +176,6 @@ describe FPM::Package::Python, :if => python_usable? do
 
   context "python_scripts_executable is set" do
     it "should have scripts with a custom hashbang line" do
-<<<<<<< HEAD
-      #subject.attributes[:python_install_bin] = '/usr/bin'
-      subject.attributes[:python_scripts_executable] = "fancypants"
-      subject.input("django")
-
-      # Get the default scripts install directory and use it to find django-admin.py from Django
-      # Then let's make sure the scripts executable setting worked!
-      python_bindir = %x{python -c 'from distutils.sysconfig import get_config_var; print(get_config_var("BINDIR"))'}.chomp
-      path = subject.staging_path(File.join(python_bindir, "django-admin.py"))
-=======
       subject.attributes[:python_scripts_executable] = "fancypants"
       subject.input("django")
 
@@ -196,7 +183,6 @@ describe FPM::Package::Python, :if => python_usable? do
       script_dir = easy_install_default('script_dir')
 
       path = subject.staging_path(File.join(script_dir, "django-admin.py"))
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
       # Read the first line (the hashbang line) of the django-admin.py script
       fd = File.new(path, "r")

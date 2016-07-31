@@ -81,11 +81,7 @@ class FPM::Package::OSXpkg < FPM::Package
     SCRIPT_MAP.each do |scriptname, filename|
       next unless script?(scriptname)
 
-<<<<<<< HEAD
-      with(scripts_path(filename)) do |pkgscript|
-=======
       scripts_path(filename).tap do |pkgscript|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
         logger.info("Writing pkg script", :source => filename, :target => pkgscript)
         File.write(pkgscript, script(scriptname))
         # scripts are required to be executable
@@ -107,11 +103,7 @@ class FPM::Package::OSXpkg < FPM::Package
 
   # Extract name and version from PackageInfo XML
   def extract_info(package)
-<<<<<<< HEAD
-    with(build_path("expand")) do |path|
-=======
     build_path("expand").tap do |path|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
       doc = REXML::Document.new File.open(File.join(path, "PackageInfo"))
       pkginfo_elem = doc.elements["pkg-info"]
       identifier = pkginfo_elem.attribute("identifier").value
@@ -162,16 +154,10 @@ class FPM::Package::OSXpkg < FPM::Package
     FileUtils.remove_file(temp_info)
   end # def output
 
-<<<<<<< HEAD
-  def to_s(format=nil)
-    return super("NAME-VERSION.pkg") if format.nil?
-    return super(format)
-=======
   def to_s_extension; "pkg"; end
 
   def to_s(format=nil)
     return super(format.nil? ? "NAME-VERSION.EXTENSION" : format)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   end # def to_s
 
   public(:input, :output, :identifier, :to_s)

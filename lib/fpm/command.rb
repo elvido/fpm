@@ -56,13 +56,8 @@ class FPM::Command < Clamp::Command
     :attribute_name => :chdir
   option "--prefix", "PREFIX",
     "A path to prefix files with when building the target package. This may " \
-<<<<<<< HEAD
-    "be necessary for all input packages. For example, the 'gem' type will " \
-    "prefix with your gem directory automatically."
-=======
     "not be necessary for all input packages. For example, the 'gem' type " \
     "will prefix with your gem directory automatically."
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   option ["-p", "--package"], "OUTPUT", "The package file path to output."
   option ["-f", "--force"], :flag, "Force output even if it will overwrite an " \
     "existing file", :default => false
@@ -112,21 +107,12 @@ class FPM::Command < Clamp::Command
     "specified multiple times.", :multivalued => true,
     :attribute_name => :provides
   option "--conflicts", "CONFLICTS",
-<<<<<<< HEAD
-    "Other packages/versions this package conflicts with. This flag can " \
-    "specified multiple times.", :multivalued => true,
-    :attribute_name => :conflicts
-  option "--replaces", "REPLACES",
-    "Other packages/versions this package replaces. This flag can be " \
-    "specified multiple times.", :multivalued => true,
-=======
     "Other packages/versions this package conflicts with. This flag can be " \
     "specified multiple times.", :multivalued => true,
     :attribute_name => :conflicts
   option "--replaces", "REPLACES",
     "Other packages/versions this package replaces. Equivalent of rpm's 'Obsoletes'. " \
     "This flag can be specified multiple times.", :multivalued => true,
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     :attribute_name => :replaces
 
   option "--config-files", "CONFIG_FILES",
@@ -136,13 +122,9 @@ class FPM::Command < Clamp::Command
     "directory all files inside it will be recursively marked as config files.",
     :multivalued => true, :attribute_name => :config_files
   option "--directories", "DIRECTORIES", "Recursively mark a directory as being owned " \
-<<<<<<< HEAD
-    "by the package", :multivalued => true, :attribute_name => :directories
-=======
     "by the package. Use this flag multiple times if you have multiple directories " \
     "and they are not under the same parent directory ", :multivalued => true,
     :attribute_name => :directories
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   option ["-a", "--architecture"], "ARCHITECTURE",
     "The architecture name. Usually matches 'uname -m'. For automatic values," \
     " you can use '-a all' or '-a native'. These two strings will be " \
@@ -169,16 +151,8 @@ class FPM::Command < Clamp::Command
     "patterns to exclude from input."
 
   option "--description", "DESCRIPTION", "Add a description for this package." \
-<<<<<<< HEAD
-    " You can include '\n' sequences to indicate newline breaks.",
-    :default => "no description" do |val|
-    # Replace literal "\n" sequences with a newline character.
-    val.gsub("\\n", "\n")
-  end
-=======
     " You can include '\\n' sequences to indicate newline breaks.",
     :default => "no description"
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   option "--url", "URI", "Add a url for this package.",
     :default => "http://example.com/no-uri-given"
   option "--inputs", "INPUTS_PATH",
@@ -227,11 +201,7 @@ class FPM::Command < Clamp::Command
         "--before-install, --after-install, --before-remove, and \n" \
         "--after-remove will behave in a backwards-compatible manner\n" \
         "(they will not be upgrade-case aware).\n" \
-<<<<<<< HEAD
-        "Currently only supports deb and rpm packages." do |val|
-=======
         "Currently only supports deb, rpm and pacman packages." do |val|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     File.expand_path(val) # Get the full path to the script
   end # --after-upgrade
   option "--before-upgrade", "FILE",
@@ -239,11 +209,7 @@ class FPM::Command < Clamp::Command
         "--before-install, --after-install, --before-remove, and \n" \
         "--after-remove will behave in a backwards-compatible manner\n" \
         "(they will not be upgrade-case aware).\n" \
-<<<<<<< HEAD
-        "Currently only supports deb and rpm packages." do |val|
-=======
         "Currently only supports deb, rpm and pacman packages." do |val|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     File.expand_path(val) # Get the full path to the script
   end # --before-upgrade
 
@@ -347,11 +313,7 @@ class FPM::Command < Clamp::Command
     #
     # Things like '--foo-bar' will be available as pkg.attributes[:foo_bar]
     self.class.declared_options.each do |option|
-<<<<<<< HEAD
-      with(option.attribute_name) do |attr|
-=======
       option.attribute_name.tap do |attr|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
         next if attr == "help"
         # clamp makes option attributes available as accessor methods
         # --foo-bar is available as 'foo_bar'. Put these in the package
@@ -370,14 +332,6 @@ class FPM::Command < Clamp::Command
       end
     end
 
-<<<<<<< HEAD
-    # Each remaining command line parameter is used as an 'input' argument.
-    # For directories, this means paths. For things like gem and python, this
-    # means package name or paths to the packages (rails, foo-1.0.gem, django,
-    # bar/setup.py, etc)
-    args.each do |arg|
-      input.input(arg)
-=======
     if input_type == "pleaserun"
       # Special case for pleaserun that all parameters are considered the 'command'
       # to run through pleaserun.
@@ -390,7 +344,6 @@ class FPM::Command < Clamp::Command
       args.each do |arg|
         input.input(arg)
       end
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     end
 
     # If --inputs was specified, read it as a file.
@@ -415,13 +368,6 @@ class FPM::Command < Clamp::Command
         return 1
       end
 
-<<<<<<< HEAD
-      # Read each line as a path
-      File.new(exclude-file, "r").each_line do |line| 
-        # Handle each line as if it were an argument
-        # 'excludes' is defined above near the -x option.
-        excludes << line.strip
-=======
       # Ensure hash is initialized
       input.attributes[:excludes] ||= []
 
@@ -429,7 +375,6 @@ class FPM::Command < Clamp::Command
       File.new(exclude_file, "r").each_line do |line|
         # Handle each line as if it were an argument
         input.attributes[:excludes] << line.strip
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
       end
     end
 
@@ -458,10 +403,6 @@ class FPM::Command < Clamp::Command
     set.call(input, :url)
     set.call(input, :vendor)
     set.call(input, :version)
-<<<<<<< HEAD
-    set.call(input, :architecture)
-=======
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
     input.conflicts += conflicts
     input.dependencies += dependencies
@@ -479,10 +420,6 @@ class FPM::Command < Clamp::Command
 
     input.attrs = h
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     script_errors = []
     setscript = proc do |scriptname|
       # 'self.send(scriptname) == self.before_install == --before-install
@@ -577,11 +514,7 @@ class FPM::Command < Clamp::Command
     end
   end # def execute
 
-<<<<<<< HEAD
-  def run(*args)
-=======
   def run(*run_args)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     logger.subscribe(STDOUT)
 
     # fpm initialization files, note the order of the following array is
@@ -590,23 +523,6 @@ class FPM::Command < Clamp::Command
     rc_files = [ ".fpm" ]
     rc_files << File.join(ENV["HOME"], ".fpm") if ENV["HOME"]
 
-<<<<<<< HEAD
-    rc_files.each do |rc_file|
-      if File.readable? rc_file
-        logger.warn("Loading flags from rc file #{rc_file}")
-        File.readlines(rc_file).each do |line|
-          # reverse because 'unshift' pushes onto the left side of the array.
-          Shellwords.shellsplit(line).reverse.each do |arg|
-            # Put '.fpm'-file flags *before* the command line flags
-            # so that we the CLI can override the .fpm flags
-            ARGV.unshift(arg)
-          end
-        end
-      end
-    end
-
-    super(*args)
-=======
     rc_args = []
 
     if ENV["FPMOPTS"]
@@ -642,7 +558,6 @@ class FPM::Command < Clamp::Command
     ARGV.unshift(*flags)
     ARGV.push(*args)
     super(*run_args)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   rescue FPM::Package::InvalidArgument => e
     logger.error("Invalid package argument: #{e}")
     return 1
@@ -677,33 +592,21 @@ class FPM::Command < Clamp::Command
 
       # Verify the types requested are valid
       types = FPM::Package.types.keys.sort
-<<<<<<< HEAD
-      with(@command.input_type) do |val|
-=======
       @command.input_type.tap do |val|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
         next if val.nil?
         mandatory(FPM::Package.types.include?(val),
                   "Invalid input package -s flag) type #{val.inspect}. " \
                   "Expected one of: #{types.join(", ")}")
       end
 
-<<<<<<< HEAD
-      with(@command.output_type) do |val|
-=======
       @command.output_type.tap do |val|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
         next if val.nil?
         mandatory(FPM::Package.types.include?(val),
                   "Invalid output package (-t flag) type #{val.inspect}. " \
                   "Expected one of: #{types.join(", ")}")
       end
 
-<<<<<<< HEAD
-      with (@command.dependencies) do |dependencies|
-=======
       @command.dependencies.tap do |dependencies|
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
         # Verify dependencies don't include commas (#257)
         dependencies.each do |dep|
           next unless dep.include?(",")

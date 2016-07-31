@@ -457,8 +457,6 @@ describe FPM::Package::RPM do
     end # dist
   end # #output
 
-<<<<<<< HEAD
-=======
   describe "prefix attribute" do
     it "should default to slash" do
       insist { subject.prefix } == "/"
@@ -477,7 +475,6 @@ describe FPM::Package::RPM do
     end
   end
 
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   describe "regressions should not occur", :if => program_exists?("rpmbuild") do
     before :each do
       @tempfile_handle =
@@ -626,13 +623,8 @@ describe FPM::Package::RPM do
       insist { subject.architecture } == "noarch" # see #architecture
       insist { subject.iteration } == "100"
       insist { subject.epoch } == 5
-<<<<<<< HEAD
-      insist { subject.dependencies[0] }  == "something > 10"
-      insist { subject.dependencies[1] } == "hello >= 20"
-=======
       insist { subject.dependencies }.include?("something > 10")
       insist { subject.dependencies }.include?("hello >= 20")
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
       insist { subject.conflicts[0] } == "bad < 2"
       insist { subject.license } == @generator.license.split("\n").join(" ") # See issue #252
       insist { subject.provides[0] } == "bacon = 1.0"

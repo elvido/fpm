@@ -74,8 +74,6 @@ describe FPM::Package::Gem, :if => have_gem do
       insist { subject.name } == "example"
     end
   end
-<<<<<<< HEAD
-=======
 
   context "when :gem_shebang is nil/default" do
     before :each do
@@ -101,5 +99,4 @@ describe FPM::Package::Gem, :if => have_gem do
       insist { File.readlines(file_path).grep("#!/opt/special/bin/ruby\n").any? } == true
     end
   end
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 end # describe FPM::Package::Gem

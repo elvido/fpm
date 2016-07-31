@@ -7,8 +7,6 @@ before_remove() {
 <% if script?(:before_remove) -%>
 <%=  script(:before_remove) %>
 <% end -%>
-<<<<<<< HEAD
-=======
 
 <%# Removing the systemd service-%>
 <% if attributes[:deb_systemd] -%>
@@ -16,7 +14,6 @@ systemctl stop <%= attributes[:deb_systemd] %> >/dev/null || true
 systemctl disable <%= attributes[:deb_systemd] %> >/dev/null || true
 systemctl --system daemon-reload >/dev/null || true
 <% end -%>
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 }
 
 dummy() {

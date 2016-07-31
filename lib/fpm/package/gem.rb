@@ -30,12 +30,9 @@ class FPM::Package::Gem < FPM::Package
   option "--gem", "PATH_TO_GEM",
           "The path to the 'gem' tool (defaults to 'gem' and searches " \
           "your $PATH)", :default => "gem"
-<<<<<<< HEAD
-=======
   option "--shebang", "SHEBANG",
           "Replace the shebang in the executables in the bin path with a " \
           "custom string", :default => nil
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   option "--fix-name", :flag, "Should the target package name be prefixed?",
     :default => true
   option "--fix-dependencies", :flag, "Should the package dependencies be " \
@@ -184,11 +181,7 @@ class FPM::Package::Gem < FPM::Package
     ::FileUtils.mkdir_p(installdir)
     # TODO(sissel): Allow setting gem tool path
     args = [attributes[:gem_gem], "install", "--quiet", "--no-ri", "--no-rdoc",
-<<<<<<< HEAD
-       "--install-dir", installdir, "--ignore-dependencies"]
-=======
        "--no-user-install", "--install-dir", installdir, "--ignore-dependencies"]
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     if attributes[:gem_env_shebang?]
       args += ["-E"]
     end
@@ -206,8 +199,6 @@ class FPM::Package::Gem < FPM::Package
     args << gem_path
     safesystem(*args)
 
-<<<<<<< HEAD
-=======
     # Replace the shebangs in the executables
     if attributes[:gem_shebang]
       ::Dir.entries(bin_path).each do |file_name|
@@ -224,7 +215,6 @@ class FPM::Package::Gem < FPM::Package
       end
     end
 
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     # Delete bin_path if it's empty, and any empty parents (#612)
     # Above, we mkdir_p bin_path because rubygems aborts if the parent
     # directory doesn't exist, for example:

@@ -1,9 +1,6 @@
 # Effing Package Management
-<<<<<<< HEAD
-=======
 
 [![Build Status](https://travis-ci.org/jordansissel/fpm.svg?branch=master)](https://travis-ci.org/jordansissel/fpm)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 ## Preface
 
@@ -72,18 +69,12 @@ The goal of FPM is to be able to easily build platform-native packages.
 Many Linux distros do not ship ruby C headers or a compiler by default, and
 you'll need that to install fpm.
 
-<<<<<<< HEAD
-    apt-get install ruby-dev gcc
-    
-    yum install ruby-devel gcc
-=======
 ```
 # deb based distributions:
     apt-get install ruby-dev gcc make
 # rpm ones:
     yum install ruby-devel gcc make
 ```
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 Additional packages will be required depending on the source and target package
 types (rpmbuild for rpm, etc.). FPM will show the commands that are required
@@ -97,11 +88,7 @@ You can install fpm with gem:
     
 (On OS X, you may also need gnutar: `brew install gnu-tar`.)
 
-<<<<<<< HEAD
-Building a package named "awesome" might look something like this:
-=======
 Building a package might look something like this:
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
     fpm -s <source type> -t <target type> [list of sources]...
 
@@ -133,10 +120,7 @@ Sources:
 * rpm
 * deb
 * node packages (npm)
-<<<<<<< HEAD
-=======
 * pacman (ArchLinux) packages
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 Targets:
 
@@ -146,10 +130,7 @@ Targets:
 * tar
 * directories
 * Mac OS X `.pkg` files (`osxpkg`)
-<<<<<<< HEAD
-=======
 * pacman (ArchLinux) packages
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 ## Need Help or Want to Contribute?
 
@@ -158,56 +139,6 @@ complaints, and even something you drew up on a napkin.
 
 It is more important to me that you are able to contribute and get help if you
 need it..
-<<<<<<< HEAD
-
-That said, some basic guidelines, which you are free to ignore :)
-
-* Have a problem you want fpm to solve for you? You can email the
-  [mailing list](http://groups.google.com/group/fpm-users), or
-  join the IRC channel #fpm on irc.freenode.org, or email me personally
-  (jls@semicomplete.com)
-* Have an idea or a feature request? File a ticket on
-  [github](https://github.com/jordansissel/fpm/issues), or email the
-  [mailing list](http://groups.google.com/group/fpm-users), or email
-  me personally (jls@semicomplete.com) if that is more comfortable.
-* If you think you found a bug, it probably is a bug. File it on
-  [github](https://github.com/jordansissel/fpm/issues) or send details to
-  the [mailing list](http://groups.google.com/group/fpm-users).
-* If you want to send patches, best way is to fork this repo and send me a pull
-  request. If you don't know git, I also accept diff(1) formatted patches -
-  whatever is most comfortable for you.
-* Want to lurk about and see what others are doing? IRC (#fpm on
-  irc.freenode.org) is a good place for this as is the 
-  [mailing list](http://groups.google.com/group/fpm-users)
-
-### Contributing by forking from GitHub
-
-Please note that this project is released with a Contributor Code of Conduct.
-By participating in this project you agree to abide by its terms. See
-the [CODE\_OF\_CONDUCT.md](CODE_OF_CONDUCT.md).
-
-First, create a github account if you do not already have one.  Log in to
-github and go to [the main fpm github page](https://github.com/jordansissel/fpm).
-
-At the top right, click on the button labeled "Fork".  This will put a forked
-copy of the main fpm repo into your account.  Next, clone your account's github
-repo of fpm.  For example:
-
-    $ git clone git@github.com:yourusername/fpm.git
-
-If you don't already have the bundler gem installed, install it now:
-
-    $ gem install bundler
-
-Now change to the root of the fpm repo and run:
-
-    $ bundle install
-
-This will install all of the dependencies required for running fpm from source.
-Most importantly, you should see the following output from the bundle command
-when it lists the fpm gem:
-
-=======
 
 That said, some basic guidelines, which you are free to ignore :)
 
@@ -260,24 +191,8 @@ when it lists the fpm gem:
     Using json (1.8.1)
     Using fpm (0.4.42) from source at .
     Using hitimes (1.2.1)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
-    ...
-    Using json (1.8.1) 
-    Using fpm (0.4.42) from source at .
-    Using hitimes (1.2.1) 
     ...
 
-Next, run make in root of the fpm repo.  If there are any problems (such as
-missing dependencies) you should receive an error
-
-At this point, the fpm command should run directly from the code in your cloned
-repo.  Now simply make whatever changes you want, commit the code, and push
-your commit back to master.
-
-<<<<<<< HEAD
-If you think your changes are ready to be merged back to the main fpm repo, you
-can generate a pull request on the github website for your repo and send it in
-=======
 If your system doesn't have `bsdtar` by default, make sure to install it or some
 tests will fail:
 
@@ -294,17 +209,12 @@ your commit back to master.
 
 If you think your changes are ready to be merged back to the main fpm repo, you
 can generate a pull request on the GitHub website for your repo and send it in
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 for review.
 
 ##Problems running bundle install?
 
 If you are installing on Mac OS 10.9 (Mavericks) you will need to make sure that 
-<<<<<<< HEAD
-you have the standalone command line tools seperate from Xcode:
-=======
 you have the standalone command line tools separate from Xcode:
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
     $ xcode-select --install
 

@@ -30,12 +30,9 @@ class FPM::Package::CPAN < FPM::Package
   option "--sandbox-non-core", :flag,
     "Sandbox all non-core modules, even if they're already installed", :default => true
 
-<<<<<<< HEAD
-=======
   option "--cpanm-force", :flag,
     "Pass the --force parameter to cpanm", :default => false
 
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   private
   def input(package)
     #if RUBY_VERSION =~ /^1\.8/
@@ -49,11 +46,7 @@ class FPM::Package::CPAN < FPM::Package
     require "net/http"
     require "json"
 
-<<<<<<< HEAD
-    if (attributes[:cpan_local_module?])
-=======
     if File.exist?(package)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
       moduledir = package
     else
       result = search(package)
@@ -63,21 +56,6 @@ class FPM::Package::CPAN < FPM::Package
 
     # Read package metadata (name, version, etc)
     if File.exist?(File.join(moduledir, "META.json"))
-<<<<<<< HEAD
-      metadata = JSON.parse(File.read(File.join(moduledir, ("META.json"))))
-    elsif File.exist?(File.join(moduledir, ("META.yml")))
-      require "yaml"
-      metadata = YAML.load_file(File.join(moduledir, ("META.yml")))
-    elsif File.exist?(File.join(moduledir, "MYMETA.json"))
-      metadata = JSON.parse(File.read(File.join(moduledir, ("MYMETA.json"))))
-    elsif File.exist?(File.join(moduledir, ("MYMETA.yml")))
-      require "yaml"
-      metadata = YAML.load_file(File.join(moduledir, ("MYMETA.yml")))
-    else
-      raise FPM::InvalidPackageConfiguration,
-        "Could not find package metadata. Checked for META.json and META.yml"
-    end
-=======
       local_metadata = JSON.parse(File.read(File.join(moduledir, ("META.json"))))
     elsif File.exist?(File.join(moduledir, ("META.yml")))
       require "yaml"
@@ -100,7 +78,6 @@ class FPM::Package::CPAN < FPM::Package
         "Could not find package metadata. Checked for META.json, META.yml, and MetaCPAN API data"
     end
 
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     self.version = metadata["version"]
     self.description = metadata["abstract"]
 
@@ -151,10 +128,7 @@ class FPM::Package::CPAN < FPM::Package
     cpanm_flags += ["-n"] if !attributes[:cpan_test?]
     cpanm_flags += ["--mirror", "#{attributes[:cpan_mirror]}"] if !attributes[:cpan_mirror].nil?
     cpanm_flags += ["--mirror-only"] if attributes[:cpan_mirror_only?] && !attributes[:cpan_mirror].nil?
-<<<<<<< HEAD
-=======
     cpanm_flags += ["--force"] if attributes[:cpan_cpanm_force?]
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
     safesystem(attributes[:cpan_cpanm_bin], *cpanm_flags)
 
@@ -323,11 +297,7 @@ class FPM::Package::CPAN < FPM::Package
       release_response = httpfetch(metacpan_release_url)
     rescue Net::HTTPServerException => e
       logger.error("metacpan release query failed.", :error => e.message,
-<<<<<<< HEAD
-                    :module => package, :url => metacpan_release_url)
-=======
                     :url => metacpan_release_url)
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
       raise FPM::InvalidPackageConfiguration, "metacpan release query failed"
     end
 

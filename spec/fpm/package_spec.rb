@@ -193,8 +193,6 @@ describe FPM::Package do
       expect(subject.attributes[:template_scripts?]).to(be_falsey)
     end
   end
-<<<<<<< HEAD
-=======
 
   describe "#staging_path and #staging_path" do
     before() do
@@ -218,5 +216,4 @@ describe FPM::Package do
       expect(subject.staging_path("hello2")).to(include("staging"))
     end
   end
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 end # describe FPM::Package

@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-start() {
-}
-
-stop() {
-}
-
-restart() {
-}
-
-force-reload() {
-}
-=======
 #! /bin/sh
 # Start/stop the test daemon.
 #
@@ -47,4 +34,3 @@ case $1 in
   stop) do_stop ;;
   force-reload) do_reload ;;
 esac
->>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
