@@ -101,7 +101,11 @@ class FPM::Package::RPM < FPM::Package
   option "--autoprov", :flag, "Enable RPM's AutoProv option"
 
   option "--attr", "ATTRFILE",
+<<<<<<< HEAD
     "Set the attribute for a file (%attr).",
+=======
+    "Set the attribute for a file (%attr), e.g. --rpm-attr 750,user1,group1:/some/file",
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     :multivalued => true, :attribute_name => :attrs
 
   option "--init", "FILEPATH", "Add FILEPATH as an init script",
@@ -122,6 +126,17 @@ class FPM::Package::RPM < FPM::Package
     next rpmbuild_filter_from_requires
   end
 
+<<<<<<< HEAD
+=======
+  rpm_tags = []
+  option "--tag", "TAG",
+    "Adds a custom tag in the spec file as is. " \
+    "Example: --rpm-tag 'Requires(post): /usr/sbin/alternatives'" do |add_tag|
+      rpm_tags << add_tag
+    next rpm_tags
+  end
+
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   option "--ignore-iteration-in-dependencies", :flag,
             "For '=' (equal) dependencies, allow iterations on the specified " \
             "version. Default is to be specific. This option allows the same " \
@@ -168,11 +183,23 @@ class FPM::Package::RPM < FPM::Package
   # Replace ? with [?] to make rpm not use globs
   # Replace % with [%] to make rpm not expand macros
   def rpm_fix_name(name)
+<<<<<<< HEAD
     name = "\"#{name}\"" if name[/\s/]
     name = name.gsub("[", "[\\[]")
     name = name.gsub("*", "[*]")
     name = name.gsub("?", "[?]")
     name = name.gsub("%", "[%]")
+=======
+    name = name.gsub(/(\ |\[|\]|\*|\?|\%|\$)/, {
+      ' ' => '?',
+      '%' => '[%]',
+      '$' => '[$]',
+      '?' => '[?]',
+      '*' => '[*]',
+      '[' => '[\[]',
+      ']' => '[\]]'
+    })
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   end
 
   def rpm_file_entry(file)
@@ -309,12 +336,25 @@ class FPM::Package::RPM < FPM::Package
 
   def rpm_get_trigger_type(flag)
     if (flag & (1 << 25)) == (1 << 25)
+<<<<<<< HEAD
        :rpm_trigger_before_install
     elsif (flag & (1 << 16)) == (1 << 16)
        :rpm_trigger_after_install
     elsif (flag & (1 << 17)) == (1 << 17)
        :rpm_trigger_before_uninstall
     elsif (flag & (1 << 18)) == (1 << 18)
+=======
+       # RPMSENSE_TRIGGERPREIN = (1 << 25),  /*!< %triggerprein dependency. */
+       :rpm_trigger_before_install
+    elsif (flag & (1 << 16)) == (1 << 16)
+       # RPMSENSE_TRIGGERIN  = (1 << 16),    /*!< %triggerin dependency. */
+       :rpm_trigger_after_install
+    elsif (flag & (1 << 17)) == (1 << 17)
+       # RPMSENSE_TRIGGERUN  = (1 << 17),    /*!< %triggerun dependency. */
+       :rpm_trigger_before_uninstall
+    elsif (flag & (1 << 18)) == (1 << 18)
+       # RPMSENSE_TRIGGERPOSTUN = (1 << 18), /*!< %triggerpostun dependency. */
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
        :rpm_trigger_after_target_uninstall
     else
        @logger.fatal("I don't know about this triggerflag ('#{flag}')")
@@ -507,7 +547,15 @@ class FPM::Package::RPM < FPM::Package
   end # def output
 
   def prefix
+<<<<<<< HEAD
     return (attributes[:prefix] or "/")
+=======
+    if attributes[:prefix] and attributes[:prefix] != '/'
+      return attributes[:prefix].chomp('/')
+    else
+      return "/"
+    end
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   end # def prefix
 
   def build_sub_dir
@@ -538,19 +586,38 @@ class FPM::Package::RPM < FPM::Package
     return @epoch if @epoch.is_a?(Numeric)
 
     if @epoch.nil? or @epoch.empty?
+<<<<<<< HEAD
       logger.warn("no value for epoch is set, defaulting to nil")
+=======
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
       return nil
     end
 
     return @epoch
   end # def epoch
 
+<<<<<<< HEAD
   def to_s(format=nil)
     if format.nil?
       return super("NAME-VERSION-ITERATION.DIST.ARCH.TYPE").gsub('DIST', attributes[:rpm_dist]) if attributes[:rpm_dist]
       return super("NAME-VERSION-ITERATION.ARCH.TYPE")
     end
     return super(format)
+=======
+  def to_s_dist;
+    attributes[:rpm_dist] ? "#{attributes[:rpm_dist]}" : "DIST";
+  end
+
+  def to_s(format=nil)
+    if format.nil?
+      format = if attributes[:rpm_dist]
+        "NAME-VERSION-ITERATION.DIST.ARCH.EXTENSION"
+      else
+        "NAME-VERSION-ITERATION.ARCH.EXTENSION"
+      end
+    end
+    return super(format.gsub("DIST", to_s_dist))
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   end # def to_s
 
   def payload_compression

@@ -20,11 +20,19 @@ Gem::Specification.new do |spec|
 
   # For parsing JSON (required for some Python support, etc)
   # http://flori.github.com/json/doc/index.html
+<<<<<<< HEAD
   spec.add_dependency("json", ">= 1.7.7") # license: Ruby License
   
   # For logging
   # https://github.com/jordansissel/ruby-cabin
   spec.add_dependency("cabin", ">= 0.6.0") # license: Apache 2 
+=======
+  spec.add_dependency("json", ">= 1.7.7", "< 2.0") # license: Ruby License
+
+  # For logging
+  # https://github.com/jordansissel/ruby-cabin
+  spec.add_dependency("cabin", ">= 0.6.0") # license: Apache 2
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
   # For backports to older rubies
   # https://github.com/marcandre/backports
@@ -35,7 +43,11 @@ Gem::Specification.new do |spec|
 
   # For command-line flag support
   # https://github.com/mdub/clamp/blob/master/README.markdown
+<<<<<<< HEAD
   spec.add_dependency("clamp", "~> 0.6") # license: MIT
+=======
+  spec.add_dependency("clamp", "~> 1.0.0") # license: MIT
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
   # For starting external processes across various ruby interpreters
   spec.add_dependency("childprocess") # license: ???
@@ -43,6 +55,20 @@ Gem::Specification.new do |spec|
   # For calling functions in dynamic libraries
   spec.add_dependency("ffi") # license: GPL3/LGPL3
 
+<<<<<<< HEAD
+=======
+  spec.add_development_dependency("rake", "~> 10") # license: MIT
+
+  # For creating tar archives (many packages are just tar archives)
+  spec.add_dependency("archive-tar-minitar") # license: GPL2+
+
+  # For creating FreeBSD package archives (xz-compressed tars)
+  spec.add_dependency("ruby-xz") # license: MIT
+
+  # For sourcing from pleaserun 
+  spec.add_dependency("pleaserun", "~> 0.0.24") # license: Apache 2
+
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   spec.add_development_dependency("rspec", "~> 3.0.0") # license: MIT (according to wikipedia)
   spec.add_development_dependency("insist", "~> 1.0.0") # license: Apache 2
   spec.add_development_dependency("pry")

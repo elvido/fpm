@@ -3,9 +3,19 @@
 
 # emacs
 \#*#
+<<<<<<< HEAD
 
 # other editors
 *~
+=======
+*~
+.#*
+
+# package builds
+*.rpm
+*.deb
+*.pkg.tar*
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 # build byproducts
 build-*/*
@@ -15,6 +25,10 @@ fpm.wiki
 
 # python
 *.pyc
+<<<<<<< HEAD
+=======
+*.egg-info
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 # RVM
 .rvmrc

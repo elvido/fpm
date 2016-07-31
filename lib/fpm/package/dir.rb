@@ -99,6 +99,23 @@ class FPM::Package::Dir < FPM::Package
       logger["method"] = "output"
       clone(".", output_path)
     end
+<<<<<<< HEAD
+=======
+
+    # Write the scripts, too.
+    scripts_path = File.join(output_path, ".scripts")
+    ::Dir.mkdir(scripts_path)
+    [:before_install, :after_install, :before_remove, :after_remove].each do |name|
+      next unless script?(name)
+      out = File.join(scripts_path, name.to_s)
+      logger.debug("Writing script", :source => name, :target => out)
+      File.write(out, script(name))
+      require "pry"
+      binding.pry
+      File.chmod(0755, out)
+    end
+
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
   ensure
     logger.remove("method")
   end # def output
@@ -128,7 +145,11 @@ class FPM::Package::Dir < FPM::Package
         "to stage files during packaging, so this setting would have " \
         "caused fpm to loop creating staging directories and copying " \
         "them into your package! Oops! If you are confused, maybe you could " \
+<<<<<<< HEAD
         "check your TMPDIR or TEMPDIR environment variables?"
+=======
+        "check your TMPDIR, TMP, or TEMP environment variables?"
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     end
 
     # For single file copies, permit file destinations
@@ -160,7 +181,11 @@ class FPM::Package::Dir < FPM::Package
     # lstat to follow symlinks
     dstat = File.stat(directory) rescue nil
     if dstat.nil?
+<<<<<<< HEAD
       FileUtils.mkdir_p(directory)
+=======
+      FileUtils.mkdir_p(directory, :mode => 0755)
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     elsif dstat.directory?
       # do nothing, it's already a directory!
     else

@@ -7,6 +7,22 @@ after_upgrade() {
 <% if script?(:after_upgrade) -%>
 <%=  script(:after_upgrade) %>
 <% end -%>
+<<<<<<< HEAD
+=======
+
+<% if attributes[:deb_systemd] -%>
+systemctl --system daemon-reload >/dev/null || true
+if ! systemctl is-enabled <%= attributes[:deb_systemd] %> >/dev/null 
+then
+    systemctl enable <%= attributes[:deb_systemd] %> >/dev/null || true
+    systemctl start <%= attributes[:deb_systemd] %> >/dev/null || true
+<% if attributes[:deb_systemd_restart_after_upgrade?] -%>
+else
+    systemctl restart <%= attributes[:deb_systemd] %> >/dev/null || true
+<% end -%>
+fi
+<% end -%>
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 }
 
 after_install() {
@@ -17,6 +33,15 @@ after_install() {
 <% if script?(:after_install) -%>
 <%=  script(:after_install) %>
 <% end -%>
+<<<<<<< HEAD
+=======
+
+<% if attributes[:deb_systemd] -%>
+systemctl --system daemon-reload >/dev/null || true
+systemctl enable <%= attributes[:deb_systemd] %> >/dev/null || true
+systemctl start <%= attributes[:deb_systemd] %> >/dev/null || true
+<% end -%>
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 }
 
 if [ "${1}" = "configure" -a -z "${2}" ] || \

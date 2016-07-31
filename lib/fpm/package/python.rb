@@ -131,7 +131,12 @@ class FPM::Package::Python < FPM::Package
                  "--build-directory", target, want_pkg)
     else
       logger.debug("using pip", :pip => attributes[:python_pip])
+<<<<<<< HEAD
       safesystem(attributes[:python_pip], "install", "--no-deps", "--no-install", "--no-use-wheel", "-i", attributes[:python_pypi], "-U", "--build", target, want_pkg)
+=======
+      # TODO: Support older versions of pip
+      safesystem(attributes[:python_pip], "download", "--no-clean", "--no-deps", "--no-binary", ":all:", "-i", attributes[:python_pypi], "--build", target,  want_pkg)
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
     end
 
     # easy_install will put stuff in @tmpdir/packagename/, so find that:

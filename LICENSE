@@ -1,6 +1,10 @@
 (This is an MIT-style license)
 
+<<<<<<< HEAD
 Copyright (c) 2011,2012,2013 Jordan Sissel and contributors.
+=======
+Copyright (c) 2011-2016 Jordan Sissel and contributors.
+>>>>>>> 40ec0c3576e02e7b8402df13185c8240adbd0e86
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
